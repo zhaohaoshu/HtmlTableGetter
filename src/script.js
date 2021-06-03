@@ -28,10 +28,10 @@ function parseTableGroup(group) {
     let taken = [];
     let rowNumber = 0;
     for (let row of group.children) {
-        if (row.style.display != "none" && row.tagName == "TR") {
+        if (window.getComputedStyle(row).display != "none" && row.tagName == "TR") {
             let colNumber = 0;
             for (let cell of row.children) {
-                if (cell.style.display != "none" && (cell.tagName == "TH" || cell.tagName == "TD")) {
+                if (window.getComputedStyle(cell).display != "none" && (cell.tagName == "TH" || cell.tagName == "TD")) {
                     while (getArrayValue(taken, [rowNumber, colNumber], false)) {
                         colNumber++;
                     }
@@ -53,7 +53,7 @@ function parseTableGroup(group) {
 function parseTable(table) {
     let result = [];
     for (let group of table.children) {
-        if (group.style.display != "none" && (group.tagName == "THEAD" || group.tagName == "TBODY" || group.tagName == "TFOOT")) {
+        if (window.getComputedStyle(group).display != "none" && (group.tagName == "THEAD" || group.tagName == "TBODY" || group.tagName == "TFOOT")) {
             result.push(parseTableGroup(group))
         }
     }
